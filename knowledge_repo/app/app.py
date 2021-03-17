@@ -197,6 +197,7 @@ class KnowledgeFlask(Flask):
         @self.before_first_request
         def ensure_excluded_tags_exist():
             # For every tag in the excluded tags, create the tag object if it doesn't exist
+            current_app.db.engine.dispose()
             excluded_tags = current_app.config['EXCLUDED_TAGS']
             for tag in excluded_tags:
                 Tag(name=tag)
